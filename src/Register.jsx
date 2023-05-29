@@ -1,24 +1,29 @@
 import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.css';
+
 //import { toast } from "react-toastify";
 //import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
-    const [userId, setUserId] = useState("");
-    const [id, setId] = useState("");
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
+
+    const [email, setEmail] = useState("");
+    const [first_name, setFirst] = useState("");
+    const [last_name, setLast] = useState("");
+    const [avatar, setAvatar] = useState("");
 
     //const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('https://jsonplaceholder.typicode.com/posts', {
+        fetch('https://reqres.in/api/users?page=1', {
             method: 'POST',
             body: JSON.stringify({
-                userId,
-                title,
-                body,
+       
+                email,
+                first_name,
+                last_name,
+                avatar,
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -33,43 +38,46 @@ export const Register = (props) => {
         <div className="auth-form-container">
 
             <form className="register-form" onSubmit={handleSubmit}>
-                <label htmlFor="name">UserID</label>
+         
+                <label htmlFor="name">email</label>
                 <input
-                    value={userId}
-                    onChange={(e) => setUserId(e.target.value)}
-                    type="id"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="iemaild"
                     placeholder=""
-                    id="userId"
-                    name="userId"
-                />
-                <label htmlFor="name">id</label>
-                <input
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                    type="id"
-                    placeholder=""
-                    id="id"
-                    name="id"
+                    id="email"
+                    name="email"
                 />
 
-                <label htmlFor="title">title</label>
+                <label htmlFor="first_name">first_name</label>
                 <input
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    type="title"
+                    value={first_name}
+                    onChange={(e) => setFirst(e.target.value)}
+                    type="first_name"
                     placeholder=""
-                    id="title"
-                    name="title"
+                    id="first_name"
+                    name="first_name"
                 />
-                <label htmlFor="body">body</label>
+                <label htmlFor="last_name">last_name</label>
                 <input
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                    type="title"
+                    value={last_name}
+                    onChange={(e) => setLast(e.target.value)}
+                    type="last_name"
                     placeholder=""
-                    id="body"
-                    name="body"
+                    id="last_name"
+                    name="last_name"
                 />
+
+<label htmlFor="avatar">avatar</label>
+                <input
+                    value={avatar}
+                    onChange={(e) => setAvatar(e.target.value)}
+                    type="avatar"
+                    placeholder=""
+                    id="avatar"
+                    name="avatar"
+                />
+
 
 
                 <button>Login</button>
