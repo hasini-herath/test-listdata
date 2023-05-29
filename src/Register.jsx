@@ -1,31 +1,83 @@
 import React, { useState } from "react";
+//import { toast } from "react-toastify";
+//import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
-    const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
-    const [name, setName] = useState("");
+    const [userId, setUserId] = useState("");
+    const [id, setId] = useState("");
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+
+    //const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email);
+
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body: JSON.stringify({
+                userId,
+                title,
+                body,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+
     }
 
-    return(
+    return (
         <div className="auth-form-container">
 
-        <form className="register-form" onSubmit={handleSubmit}>
-            <label htmlFor="name">email</label>
-            <input value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder="hasini" id="name" name="name" />
-            <label htmlFor="email">email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="hasiniherath1022@gmail.com" id="email" name="email" />
-            <label htmlFor="password">password</label>
-            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*******" id="password" name="password" />
-            <button>Login</button>
-        </form>
-        <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account?Login Here</button>
+            <form className="register-form" onSubmit={handleSubmit}>
+                <label htmlFor="name">UserID</label>
+                <input
+                    value={userId}
+                    onChange={(e) => setUserId(e.target.value)}
+                    type="id"
+                    placeholder=""
+                    id="userId"
+                    name="userId"
+                />
+                <label htmlFor="name">id</label>
+                <input
+                    value={id}
+                    onChange={(e) => setId(e.target.value)}
+                    type="id"
+                    placeholder=""
+                    id="id"
+                    name="id"
+                />
+
+                <label htmlFor="title">title</label>
+                <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    type="title"
+                    placeholder=""
+                    id="title"
+                    name="title"
+                />
+                <label htmlFor="body">body</label>
+                <input
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                    type="title"
+                    placeholder=""
+                    id="body"
+                    name="body"
+                />
 
 
-    </div>
+                <button>Login</button>
+            </form>
+            <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account?Login Here</button>
+
+
+        </div>
 
     )
 }
